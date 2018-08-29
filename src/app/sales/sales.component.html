@@ -1,0 +1,84 @@
+<div style="background-color: #F6F8FA; height: 100%;">
+  <div fxlayout="row" style="width:100%; background-color:white;margin-bottom: 20px;">
+    <img class="jpg-icon" src="../../../../assets/images/logo.png" style="width:auto; height:50px;">
+  </div>
+  <div fxLayout="row" fxLayoutAlign="">
+    <div fxlayout="column" style="width:20%; height:100%; margin-left: 20px;">
+      <mat-card>
+        <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly center">
+          <img class="jpg-icon" src="{{data[0].image}}" style="margin:10px; width:auto; height:150px;">
+          <span style="text-align: center; font-size:16px;font-weight: bold; ">{{data[0].title}}</span>
+          <span style="text-align: center; font-size:12px; color:gray ">{{data[0].subtitle}}</span>
+        </mat-card-content>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content>
+          <div *ngFor="let tag of data[0].tags" style="display: inline-block; font-size:12px;  border-radius: 5px; margin:5px; border: 1px solid lightgray; padding: 5px; ">{{tag}}</div>
+        </mat-card-content>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content style="height: 580px;">
+          <div style="margin : 20px; vertical-align: center">
+            <mat-icon style="  color:gray;">home_outline</mat-icon>
+            <span style=" vertical-align: super; color:gray;"> OVERVIEW</span>
+          </div>
+          <div style="margin : 20px;">
+            <mat-icon color="primary">bar_chart</mat-icon>
+            <span style="vertical-align: super; font-weight: bold;"> SALES</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxlayout="column" style="margin-left:20px; width: 75%">
+      <mat-card>
+        <mat-card-title>Retail Sales</mat-card-title>
+        <mat-card-content>
+          <canvas baseChart width="400" height="100" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+            [colors]="lineChartColors" [chartType]="lineChartType"></canvas>
+        </mat-card-content>
+      </mat-card>
+      <mat-card style="margin-top:20px;">
+        <mat-card-content>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%">
+
+            <!-- WEEK ENDING Column -->
+            <ng-container matColumnDef="WEEK ENDING">
+              <th mat-header-cell *matHeaderCellDef> WEEK ENDING</th>
+              <td mat-cell *matCellDef="let element"> {{element.weekEnding}} </td>
+            </ng-container>
+
+            <!-- RETAIL SALE Column -->
+            <ng-container matColumnDef="RETAIL SALES">
+              <th mat-header-cell *matHeaderCellDef> RETAIL SALES </th>
+              <td mat-cell *matCellDef="let element"> {{element.retailSales}} </td>
+            </ng-container>
+
+            <!-- WHOLESALE SALES Column -->
+            <ng-container matColumnDef="WHOLESALE SALES">
+              <th mat-header-cell *matHeaderCellDef> WHOLESALE SALES </th>
+              <td mat-cell *matCellDef="let element"> {{element.wholesaleSales}} </td>
+            </ng-container>
+
+            <!-- UNITS SOLD Column -->
+            <ng-container matColumnDef="UNITS SOLD">
+              <th mat-header-cell *matHeaderCellDef> UNITS SOLD </th>
+              <td mat-cell *matCellDef="let element"> {{element.unitsSold}} </td>
+            </ng-container>
+            <!-- RETAILER MARGIN Column -->
+            <ng-container matColumnDef="RETAILER MARGIN">
+              <th mat-header-cell *matHeaderCellDef> RETAILER MARGIN </th>
+              <td mat-cell *matCellDef="let element"> {{element.retailerMargin}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+</div>
